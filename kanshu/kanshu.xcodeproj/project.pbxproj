@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5465222C1A64843300CD4156 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5465222B1A64843300CD4156 /* SignInViewController.swift */; };
 		54D07D081A62BE5D000DD217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D07D071A62BE5D000DD217 /* AppDelegate.swift */; };
 		54D07D0A1A62BE5D000DD217 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D07D091A62BE5D000DD217 /* ViewController.swift */; };
 		54D07D0D1A62BE5D000DD217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54D07D0B1A62BE5D000DD217 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5465222B1A64843300CD4156 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		54D07D021A62BE5D000DD217 /* kanshu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kanshu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D07D061A62BE5D000DD217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54D07D071A62BE5D000DD217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				54D07D071A62BE5D000DD217 /* AppDelegate.swift */,
 				54D07D091A62BE5D000DD217 /* ViewController.swift */,
 				54D07D0B1A62BE5D000DD217 /* Main.storyboard */,
+				5465222B1A64843300CD4156 /* SignInViewController.swift */,
 				54D07D0E1A62BE5D000DD217 /* Images.xcassets */,
 				54D07D101A62BE5D000DD217 /* LaunchScreen.xib */,
 				54D07D051A62BE5D000DD217 /* Supporting Files */,
@@ -214,6 +217,7 @@
 			files = (
 				54D07D0A1A62BE5D000DD217 /* ViewController.swift in Sources */,
 				54D07D081A62BE5D000DD217 /* AppDelegate.swift in Sources */,
+				5465222C1A64843300CD4156 /* SignInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +411,7 @@
 				54D07D231A62BE5D000DD217 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		54D07D241A62BE5D000DD217 /* Build configuration list for PBXNativeTarget "kanshuTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +420,7 @@
 				54D07D261A62BE5D000DD217 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
