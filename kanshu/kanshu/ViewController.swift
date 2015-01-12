@@ -51,7 +51,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
 	
 	//Button Actions
 	@IBAction func signinAction(sender: UIButton) {
-		self.showAlertView("Sign In")
+//		self.showAlertView("Sign In")
 	}
 
 	@IBAction func signupAction(sender: UIButton) {
@@ -117,6 +117,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
 		
 		tableView.hidden = true
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		
+	}
+	
+	//segue unwinding
+	@IBAction func unwindToViewController (sender: UIStoryboardSegue){
 		
 	}
 }
