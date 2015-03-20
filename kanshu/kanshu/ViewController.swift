@@ -9,20 +9,27 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
-
+    
+    let apiHandler = APIHandler.sharedInstance()
+    
 	@IBOutlet weak var emailField: UITextField!
 	@IBOutlet weak var usernameField: UITextField!
 	@IBOutlet weak var passwordField: UITextField!
 	@IBOutlet weak var readingAbilityField: UITextField!
 	
-	@IBOutlet weak var readingAbiiltyButton: UIButton!
+	@IBOutlet weak var readingAbilityButton: UIButton!
 	@IBOutlet weak var tableView: UITableView!
 	
 	let ability = ["Absolute Beginner", "HSK 1","HSK 2","HSK 3","HSK 4","HSK 5","HSK 6"]
 	
+    // MARK: - Controller Lifecycle
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+        // If the user clicks the background screen while typing, the keyboard should dismiss.
+        createGestureRecognizer()
+        
 		//we hide the ability selection tableview
 		tableView.hidden = true
 		
@@ -33,11 +40,35 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
 		// Dispose of any resources that can be recreated.
 	}
 
-	
-	//Alert View
+    //MARK: - Gesture Recognizer for tapping screen to get rid of keyboard
+    func createGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
+        tapGestureRecognizer
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func viewTapped(gesture: UIGestureRecognizer) {
+        switch gesture.state {
+        case .Began: fallthrough
+        case .Changed: fallthrough
+        case .Ended: dismissKeyboard()
+        default: break
+        }
+    }
+    
+    // Exact function that dismisses keyboard
+    func dismissKeyboard() {
+        for textField in [emailField, usernameField, passwordField] {
+            if textField.isFirstResponder() {
+                textField.resignFirstResponder()
+            }
+        }
+    }
+    
+	// MARK: - Alert View
 	func showAlertView(title: String) {
 	
-		let alertView = UIAlertController(title: title, message: "\(title) Button Pressed", preferredStyle: UIAlertControllerStyle.Alert)
+		let alertView = UIAlertController(title: title, message: "\(title)", preferredStyle: UIAlertControllerStyle.Alert)
 		
 		let cancelAction: UIAlertAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
 			//Just dismiss the action sheet
@@ -49,13 +80,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
 		
 	}
 	
-	//Button Actions
+	// MARK: - Storyboard Elements
+    // MARK: Button Actions
 	@IBAction func signinAction(sender: UIButton) {
 //		self.showAlertView("Sign In")
 	}
 
 	@IBAction func signupAction(sender: UIButton) {
-		self.showAlertView("Sign Up")
+        apiHandler.signUp(params: ["password":"test", "email":"test@test.com", "userBio":"Something interesting", "country":"USA"], completion: { resultObject, error in
+            if error != nil {
+                println("Err: \(error)")
+                println("RO: \(resultObject)")
+            } else { println("RO: \(resultObject)") }
+        })
+        self.showAlertView("Sign Up")
 	}
 
 	@IBAction func skipAction(sender: UIButton) {
@@ -68,7 +106,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
 		self.view.endEditing(true);
 	}
 	
-	//TextField Delegate
+	//MARK: TextField Delegate
 	func textFieldDidBeginEditing(textField: UITextField) {
 		tableView.hidden = true
 	}
@@ -95,7 +133,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
 		}
 	}
 	
-	//TableView
+	// MARK: TableView
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return ability.count
 	}
@@ -113,7 +151,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		
-		readingAbiiltyButton.setTitle(ability[indexPath.row], forState: UIControlState.Normal)
+		readingAbilityButton.setTitle(ability[indexPath.row], forState: UIControlState.Normal)
 		
 		tableView.hidden = true
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)

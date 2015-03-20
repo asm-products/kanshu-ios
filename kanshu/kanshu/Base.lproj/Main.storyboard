@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -41,7 +41,7 @@ With </string>
                                             <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Kansuhu">
+                                    <fragment content="Kanshu">
                                         <attributes>
                                             <color key="NSColor" red="0.98039215686274506" green="0.52156862745098043" blue="0.031372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="13" name="HelveticaNeue"/>
@@ -274,11 +274,11 @@ With </string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
-                        <outlet property="emailField" destination="Lh9-lz-Sil" id="EkM-Fn-lte"/>
+                        <outlet property="emailField" destination="Lh9-lz-Sil" id="4fy-lJ-XEN"/>
                         <outlet property="passwordField" destination="fev-6W-Gly" id="Urf-iQ-Cb5"/>
-                        <outlet property="readingAbiiltyButton" destination="ouI-sS-5nF" id="HeU-Vb-gDa"/>
+                        <outlet property="readingAbilityButton" destination="ouI-sS-5nF" id="AnF-7o-ifO"/>
                         <outlet property="tableView" destination="ZbX-65-2im" id="eBb-yG-WbR"/>
-                        <outlet property="usernameField" destination="z3r-XD-wCX" id="haY-j4-M31"/>
+                        <outlet property="usernameField" destination="z3r-XD-wCX" id="lt6-GQ-s5T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -431,7 +431,7 @@ With </string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
-                        <outlet property="emailAddressField" destination="JGZ-v2-YZT" id="mG9-yV-O4S"/>
+                        <outlet property="emailField" destination="JGZ-v2-YZT" id="k2w-Ym-Yic"/>
                         <outlet property="passwordField" destination="vHB-fa-nFR" id="L51-h5-K9V"/>
                     </connections>
                 </viewController>

@@ -10,7 +10,9 @@ import UIKit
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
 
-	@IBOutlet weak var emailAddressField: UITextField!
+    let apiHandler = APIHandler.sharedInstance()
+    
+	@IBOutlet weak var emailField: UITextField!
 	@IBOutlet weak var passwordField: UITextField!
 	
     override func viewDidLoad() {
@@ -24,7 +26,32 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-	//Alert View
+    //MARK: - Gesture Recognizer for tapping screen to get rid of keyboard
+    func createGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
+        tapGestureRecognizer
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func viewTapped(gesture: UIGestureRecognizer) {
+        switch gesture.state {
+        case .Began: fallthrough
+        case .Changed: fallthrough
+        case .Ended: dismissKeyboard()
+        default: break
+        }
+    }
+    
+    // Exact function that dismisses keyboard
+    func dismissKeyboard() {
+        for textField in [emailField, passwordField] {
+            if textField.isFirstResponder() {
+                textField.resignFirstResponder()
+            }
+        }
+    }
+    
+	//MARK: - Alert View
 	func showAlertView(title: String) {
 		
 		let alertView = UIAlertController(title: title, message: "\(title) Button Pressed", preferredStyle: UIAlertControllerStyle.Alert)
@@ -39,8 +66,15 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		
 	}
 	
-	//Button Actions
+	//MARK: - Storyboard Items
+    //MARK: Button Actions
 	@IBAction func signInAction(sender: AnyObject) {
+        apiHandler.logIn(username: "test", password: "test", completion: { resultObject, error in
+            if error != nil {
+                println("Err: \(error)")
+                println("RO: \(resultObject)")
+            } else { println("RO: \(resultObject)") }
+        })
 		showAlertView("Sign In")
 	}
 	
@@ -48,7 +82,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		showAlertView("Forgot Password")
 	}
 	
-	//TextField Delegate
+	//MARK: TextField Delegate
 	func textFieldShouldReturn(textField: UITextField!) -> Bool // called when 'return' key pressed. return NO to ignore.
 	{
 		textField.resignFirstResponder()

@@ -14,6 +14,7 @@
 		54D07D0F1A62BE5D000DD217 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54D07D0E1A62BE5D000DD217 /* Images.xcassets */; };
 		54D07D121A62BE5D000DD217 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54D07D101A62BE5D000DD217 /* LaunchScreen.xib */; };
 		54D07D1E1A62BE5D000DD217 /* kanshuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D07D1D1A62BE5D000DD217 /* kanshuTests.swift */; };
+		AA6D87D91ABA918500F1DD5E /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6D87D81ABA918500F1DD5E /* APIHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		54D07D171A62BE5D000DD217 /* kanshuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kanshuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D07D1C1A62BE5D000DD217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54D07D1D1A62BE5D000DD217 /* kanshuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kanshuTests.swift; sourceTree = "<group>"; };
+		AA6D87D81ABA918500F1DD5E /* APIHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				54D07D091A62BE5D000DD217 /* ViewController.swift */,
 				54D07D0B1A62BE5D000DD217 /* Main.storyboard */,
 				5465222B1A64843300CD4156 /* SignInViewController.swift */,
+				AA6D87D81ABA918500F1DD5E /* APIHandler.swift */,
 				54D07D0E1A62BE5D000DD217 /* Images.xcassets */,
 				54D07D101A62BE5D000DD217 /* LaunchScreen.xib */,
 				54D07D051A62BE5D000DD217 /* Supporting Files */,
@@ -218,6 +221,7 @@
 				54D07D0A1A62BE5D000DD217 /* ViewController.swift in Sources */,
 				54D07D081A62BE5D000DD217 /* AppDelegate.swift in Sources */,
 				5465222C1A64843300CD4156 /* SignInViewController.swift in Sources */,
+				AA6D87D91ABA918500F1DD5E /* APIHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
