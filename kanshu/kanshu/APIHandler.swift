@@ -103,6 +103,7 @@ class APIHandler: NSObject, NSURLConnectionDelegate {
         NSLog("connectionDidFinishLoading")
         println("SessionData: \(sessionIDData)")
         let html = NSString(data: sessionIDData, encoding: NSUTF8StringEncoding)
+        println(html)
         println(html?.length)
     }
 }
