@@ -16,8 +16,8 @@ class APIHandler: NSObject, NSURLConnectionDelegate {
     
     var sessionIDData: NSMutableData!
     
-    private let signInURL = "https://kanshu-ds.herokuapp.com/createUser"
-    private let loginURL = "https://kanshu-ds.herokuapp.com/login"
+    private let signInURL = "***"
+    private let loginURL = "***"
     
     func signUp(#params: [String:String], completion: (responseObject: AnyObject!, error: NSError!) -> Void) {
         var request = NSMutableURLRequest(URL: NSURL(string: signInURL)!)
