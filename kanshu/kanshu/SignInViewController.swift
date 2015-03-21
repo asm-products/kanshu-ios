@@ -17,6 +17,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        createGestureRecognizer()
 
         // Do any additional setup after loading the view.
     }
@@ -29,7 +31,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     //MARK: - Gesture Recognizer for tapping screen to get rid of keyboard
     func createGestureRecognizer() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
-        tapGestureRecognizer
         view.addGestureRecognizer(tapGestureRecognizer)
     }
     
@@ -54,7 +55,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 	//MARK: - Alert View
 	func showAlertView(title: String) {
 		
-		let alertView = UIAlertController(title: title, message: "\(title) Button Pressed", preferredStyle: UIAlertControllerStyle.Alert)
+		let alertView = UIAlertController(title: title, message: "\(title)", preferredStyle: UIAlertControllerStyle.Alert)
 		
 		let cancelAction: UIAlertAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
 			//Just dismiss the action sheet
@@ -69,13 +70,21 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 	//MARK: - Storyboard Items
     //MARK: Button Actions
 	@IBAction func signInAction(sender: AnyObject) {
-        apiHandler.logIn(username: "test", password: "test", completion: { resultObject, error in
-            if error != nil {
-                println("Err: \(error)")
-                println("RO: \(resultObject)")
-            } else { println("RO: \(resultObject)") }
-        })
-		showAlertView("Sign In")
+        if emailField.text.isEmpty == false && passwordField.text.isEmpty == false {
+            apiHandler.logIn(username: emailField.text, password: passwordField.text, completion: { resultObject, error in
+                if error != nil {
+                    println("Err: \(error)")
+                    println("RO: \(resultObject)")
+                } else { println("RO: \(resultObject)") }
+            })
+            showAlertView("Sign In In Progress")
+        } else if emailField.text.isEmpty {
+            showAlertView("Please enter your email address")
+        } else if passwordField.text.isEmpty {
+            showAlertView("Please enter your password")
+        } else {
+            showAlertView("This should never happen")
+        }
 	}
 	
 	@IBAction func forgotPasswordAction(sender: AnyObject) {

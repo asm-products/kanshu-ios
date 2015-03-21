@@ -43,7 +43,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
     //MARK: - Gesture Recognizer for tapping screen to get rid of keyboard
     func createGestureRecognizer() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
-        tapGestureRecognizer
         view.addGestureRecognizer(tapGestureRecognizer)
     }
     
@@ -83,17 +82,24 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
 	// MARK: - Storyboard Elements
     // MARK: Button Actions
 	@IBAction func signinAction(sender: UIButton) {
-//		self.showAlertView("Sign In")
 	}
 
 	@IBAction func signupAction(sender: UIButton) {
-        apiHandler.signUp(params: ["password":"test", "email":"test@test.com", "userBio":"Something interesting", "country":"USA"], completion: { resultObject, error in
+        if passwordField.text.isEmpty == false && emailField.text.isEmpty == false {
+        apiHandler.signUp(params: ["password": passwordField.text, "email":emailField.text, "userBio":" ", "country":" "], completion: { resultObject, error in
             if error != nil {
                 println("Err: \(error)")
                 println("RO: \(resultObject)")
             } else { println("RO: \(resultObject)") }
         })
-        self.showAlertView("Sign Up")
+        self.showAlertView("Sign Up In Progress")
+        } else if passwordField.text.isEmpty {
+            showAlertView("Please enter a password")
+        } else if emailField.text.isEmpty {
+            showAlertView("Please enter an email address")
+        } else {
+            showAlertView("This should never happen")
+        }
 	}
 
 	@IBAction func skipAction(sender: UIButton) {
