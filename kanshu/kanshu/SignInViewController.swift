@@ -85,6 +85,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         } else {
             showAlertView("This should never happen")
         }
+        performSegueWithIdentifier("signInToArticleListSegue", sender: self)
 	}
 	
 	@IBAction func forgotPasswordAction(sender: AnyObject) {

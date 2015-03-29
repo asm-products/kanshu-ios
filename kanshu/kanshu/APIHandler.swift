@@ -15,6 +15,7 @@ class APIHandler: NSObject, NSURLConnectionDelegate {
     }
     
     var sessionIDData: NSMutableData!
+    var sessionID: NSString!
     
     private let signInURL = "http://kanshu-ds.herokuapp.com/createUser"
     private let loginURL = "http://kanshu-ds.herokuapp.com/login"
@@ -34,9 +35,7 @@ class APIHandler: NSObject, NSURLConnectionDelegate {
         
         let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
             println("Response: \(response)")
-            println("Data: \(data)")
             let strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println("Body: \(strData)")
             var err: NSError?
             let json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? NSDictionary
             
@@ -46,22 +45,22 @@ class APIHandler: NSObject, NSURLConnectionDelegate {
                 let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
                 println("Error could not parse JSON: '\(jsonStr)'")
             }
-//            else {
-//                // The JSONObjectWithData constructor didn't return an error. But, we should still
-//                // check and make sure that json has a value using optional binding.
-//                if let parseJSON = json {
-//                    // Okay, the parsedJSON is here, let's get the value for 'success' out of it
-//                    var success = parseJSON["success"] as? Int
-//                    println("Succes: \(success)")
-//                }
-//                else {
-//                    // Woa, okay the json object was nil, something went wrong. Maybe the server isn't running?
-//                    let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
-//                    println("Error could not parse JSON: \(jsonStr)")
-//                }
-//            }
+            else {
+                // The JSONObjectWithData constructor didn't return an error. But, we should still
+                // check and make sure that json has a value using optional binding.
+                if let parseJSON = json {
+                    // Okay, the parsedJSON is here, let's get the value for 'message' out of it
+                    if let message = parseJSON["message"] as? String {
+                        println("Message: \(message)")
+                    }
+                }
+                else {
+                    // Woa, okay the json object was nil, something went wrong. Maybe the server isn't running?
+                    let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("Error could not parse JSON: \(jsonStr)")
+                }
+            }
         })
-        
         task.resume()
     }
     
@@ -102,8 +101,8 @@ class APIHandler: NSObject, NSURLConnectionDelegate {
     func connectionDidFinishLoading(connection: NSURLConnection!) {
         NSLog("connectionDidFinishLoading")
         println("SessionData: \(sessionIDData)")
-        let html = NSString(data: sessionIDData, encoding: NSUTF8StringEncoding)
-        println(html)
+        sessionID = NSString(data: sessionIDData, encoding: NSUTF8StringEncoding)
+        println(sessionID)
     }
 }
 

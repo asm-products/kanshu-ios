@@ -86,13 +86,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
 
 	@IBAction func signupAction(sender: UIButton) {
         if passwordField.text.isEmpty == false && emailField.text.isEmpty == false {
-        apiHandler.signUp(params: ["password": passwordField.text, "email":emailField.text, "userBio":" ", "country":" "], completion: { resultObject, error in
-            if error != nil {
-                println("Err: \(error)")
-                println("RO: \(resultObject)")
-            } else { println("RO: \(resultObject)") }
-        })
-        self.showAlertView("Sign Up In Progress")
+            apiHandler.signUp(params: ["password": passwordField.text, "email":emailField.text, "userBio":" ", "country":" "], completion: { resultObject, error in
+                if error != nil {
+                    println("Err: \(error)")
+                    println("RO: \(resultObject)")
+                } else { println("RO: \(resultObject)") }
+            })
+            self.showAlertView("Sign Up In Progress")
         } else if passwordField.text.isEmpty {
             showAlertView("Please enter a password")
         } else if emailField.text.isEmpty {
@@ -100,6 +100,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDataSour
         } else {
             showAlertView("This should never happen")
         }
+        performSegueWithIdentifier("signUpToArticleListSegue", sender: self)
 	}
 
 	@IBAction func skipAction(sender: UIButton) {
