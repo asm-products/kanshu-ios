@@ -10,11 +10,15 @@ import UIKit
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
 
-	@IBOutlet weak var emailAddressField: UITextField!
+    let apiHandler = APIHandler.sharedInstance()
+    
+	@IBOutlet weak var emailField: UITextField!
 	@IBOutlet weak var passwordField: UITextField!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        createGestureRecognizer()
 
         // Do any additional setup after loading the view.
     }
@@ -24,10 +28,34 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-	//Alert View
+    //MARK: - Gesture Recognizer for tapping screen to get rid of keyboard
+    func createGestureRecognizer() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func viewTapped(gesture: UIGestureRecognizer) {
+        switch gesture.state {
+        case .Began: fallthrough
+        case .Changed: fallthrough
+        case .Ended: dismissKeyboard()
+        default: break
+        }
+    }
+    
+    // Exact function that dismisses keyboard
+    func dismissKeyboard() {
+        for textField in [emailField, passwordField] {
+            if textField.isFirstResponder() {
+                textField.resignFirstResponder()
+            }
+        }
+    }
+    
+	//MARK: - Alert View
 	func showAlertView(title: String) {
 		
-		let alertView = UIAlertController(title: title, message: "\(title) Button Pressed", preferredStyle: UIAlertControllerStyle.Alert)
+		let alertView = UIAlertController(title: title, message: "\(title)", preferredStyle: UIAlertControllerStyle.Alert)
 		
 		let cancelAction: UIAlertAction = UIAlertAction(title: "Dismiss", style: .Cancel) { action -> Void in
 			//Just dismiss the action sheet
@@ -39,16 +67,32 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 		
 	}
 	
-	//Button Actions
+	//MARK: - Storyboard Items
+    //MARK: Button Actions
 	@IBAction func signInAction(sender: AnyObject) {
-		showAlertView("Sign In")
+        if emailField.text.isEmpty == false && passwordField.text.isEmpty == false {
+            apiHandler.logIn(username: emailField.text, password: passwordField.text, completion: { resultObject, error in
+                if error != nil {
+                    println("Err: \(error)")
+                    println("RO: \(resultObject)")
+                } else { println("RO: \(resultObject)") }
+            })
+            showAlertView("Sign In In Progress")
+        } else if emailField.text.isEmpty {
+            showAlertView("Please enter your email address")
+        } else if passwordField.text.isEmpty {
+            showAlertView("Please enter your password")
+        } else {
+            showAlertView("This should never happen")
+        }
+        performSegueWithIdentifier("signInToArticleListSegue", sender: self)
 	}
 	
 	@IBAction func forgotPasswordAction(sender: AnyObject) {
 		showAlertView("Forgot Password")
 	}
 	
-	//TextField Delegate
+	//MARK: TextField Delegate
 	func textFieldShouldReturn(textField: UITextField!) -> Bool // called when 'return' key pressed. return NO to ignore.
 	{
 		textField.resignFirstResponder()
